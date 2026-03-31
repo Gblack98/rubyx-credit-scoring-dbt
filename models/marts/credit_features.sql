@@ -1,6 +1,6 @@
 -- credit_features.sql
 -- Feature store mart: all ML-ready credit features per customer
--- Used directly by the scoring model
+-- Consumed directly by the credit scoring model
 
 with customers as (
     select * from {{ ref('stg_customers') }}
