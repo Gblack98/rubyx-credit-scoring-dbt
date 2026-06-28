@@ -1,0 +1,7 @@
+credit_scoring:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('SCORING_DB_PATH', 'scoring.duckdb') }}"
+      threads: 4
