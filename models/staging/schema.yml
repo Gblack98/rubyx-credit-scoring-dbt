@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: stg_customers
+    columns:
+      - name: customer_id
+        tests: [not_null, unique]
+      - name: segment
+        tests:
+          - accepted_values:
+              values: [nano, micro, sme]
+      - name: monthly_income_usd
+        tests: [not_null]
+
+  - name: stg_transactions
+    description: Completed transactions only; dirty rows filtered out
+    columns:
+      - name: transaction_id
+        tests: [not_null, unique]
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: amount_usd
+        tests: [not_null]
