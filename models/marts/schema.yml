@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: credit_features
+    description: ML-ready feature table, one row per customer (dormant included)
+    columns:
+      - name: customer_id
+        tests: [not_null, unique]
+      - name: mobile_tx_ratio
+        tests: [not_null]
+      - name: days_since_last_tx
+        tests: [not_null]
