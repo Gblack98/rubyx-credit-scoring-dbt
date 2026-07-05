@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install dbt-duckdb pytest
+      - name: Unit tests
+        run: pytest -v
+      - name: Generate data and build
+        run: |
+          python data_generator/generate.py --db scoring.duckdb
+          dbt build --project-dir . --profiles-dir .
+        env:
+          SCORING_DB_PATH: ${{ github.workspace }}/scoring.duckdb
