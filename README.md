@@ -9,7 +9,7 @@ raw.customers / raw.transactions   (seeded synthetic generator, dirty rows inclu
     → scoring model (LightGBM & co)
 ```
 
-Data is **synthetic** (seeded generator in `data_generator/`) — realistic distributions, thin-file customers without bureau scores, dormant accounts, and ~2% dirty rows so the staging layer actually earns its keep. No proprietary data.
+Data is synthetic, produced by the seeded generator in `data_generator/`: realistic distributions, thin-file customers with no bureau score, dormant accounts, and about 2% of dirty rows so the staging layer has something to do. No proprietary data.
 
 ## Run
 
@@ -21,4 +21,4 @@ dbt build --project-dir . --profiles-dir .
 pytest
 ```
 
-Feature highlights: `days_since_last_tx`, `tx_count_30d/7d/24h`, `mobile_tx_ratio`, `intl_tx_ratio`, `monthly_spend_to_income_ratio`, amount velocity. Guardrails: dbt tests on uniqueness/relationships plus singular tests (ratios bounded to [0,1], full customer coverage — a scoring batch that drops customers is an incident).
+Feature highlights: `days_since_last_tx`, `tx_count_30d/7d/24h`, `mobile_tx_ratio`, `intl_tx_ratio`, `monthly_spend_to_income_ratio`, amount velocity. Guardrails: dbt tests on uniqueness/relationships plus singular tests (ratios bounded to [0,1], full customer coverage, since a scoring batch that silently drops customers is an incident).

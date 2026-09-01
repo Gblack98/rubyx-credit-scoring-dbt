@@ -1,6 +1,6 @@
 """Seeded synthetic data: a realistic West/East African fintech customer base.
 
-No proprietary data — everything here is generated (documented in README).
+No proprietary data, everything here is generated.
 The generator deliberately injects dirty rows (null ids, negative amounts,
 failed transactions) so the staging layer has real cleaning work to do.
 """

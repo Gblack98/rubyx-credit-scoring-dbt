@@ -13,7 +13,7 @@ cleaned as (
         date_trunc('day', transaction_date)             as transaction_date,
         amount::numeric(18, 2)                          as amount,
         currency::varchar(3)                            as currency,
-        -- Normalize to USD (simplified — use exchange rate table in production)
+        -- Normalize to USD (simplified, a real setup would join a rate table)
         case
             when currency = 'XOF' then amount / 655.957   -- CFA Franc
             when currency = 'NGN' then amount / 1550.0    -- Nigerian Naira
